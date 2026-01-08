@@ -1,0 +1,397 @@
+/* Основные стили для LangFlow */
+
+:root {
+    --primary-color: rgb(191, 65, 65);
+    --secondary-color: rgb(150, 50, 50);
+    --light-color: whitesmoke;
+    --dark-color: #2c3e50;
+}
+
+/* Базовые стили */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--dark-color);
+    background-color: var(--light-color);
+}
+
+/* Шапка */
+.navbar {
+    background-color: var(--primary-color) !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    font-weight: 600;
+}
+
+/* Закрепленная шапка */
+.navbar.fixed-top {
+    background-color: var(--primary-color) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1030;
+}
+
+/* Основной контент с отступом для фиксированной шапки */
+main.container {
+    padding-top: 20px;
+    min-height: calc(100vh - 200px);
+}
+
+/* Стили для преимуществ */
+.advantage-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, rgba(191, 65, 65, 0.1), rgba(150, 50, 50, 0.05));
+    border-radius: 50%;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 auto 1rem !important;
+    color: rgb(191, 65, 65);
+    font-size: 1.8rem;
+}
+
+/* Стили для блока о школе */
+.about-school {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.school-highlight {
+    border-left: 4px solid rgb(191, 65, 65);
+    padding-left: 1rem;
+    margin: 1rem 0;
+}
+
+/* Карточки */
+.card {
+    border: 1px solid rgba(0,0,0,0.125);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-bottom: 1rem;
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Таблицы */
+.table {
+    margin-bottom: 0;
+}
+
+.table th {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--secondary-color);
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(191, 65, 65, 0.05);
+}
+
+/* Кнопки */
+.btn-primary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Формы */
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(191, 65, 65, 0.25);
+}
+
+/* Пагинация */
+.pagination {
+    margin: 2rem 0;
+}
+
+.page-link {
+    color: var(--primary-color);
+    border-color: #dee2e6;
+}
+
+.page-item.active .page-link {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.page-link:hover {
+    color: var(--secondary-color);
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+
+/* Футер */
+footer {
+    background-color: var(--primary-color) !important;
+    color: white;
+    margin-top: 3rem;
+}
+
+/* Уведомления */
+.alert {
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Заголовки */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-color);
+}
+
+.display-4, .display-5 {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+/* Логотип-заглушка */
+.logo-placeholder {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+}
+
+/* Стили для поисковых форм */
+#course-search-form,
+#tutor-search-form {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+}
+
+/* Стили для информации о расчете стоимости */
+.price-calculation-info {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-left: 3px solid rgb(191, 65, 65);
+}
+
+.price-calculation-info h6 {
+    color: rgb(191, 65, 65);
+    margin-bottom: 0.5rem;
+}
+
+.calculation-details {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.option-badge {
+    background-color: rgba(191, 65, 65, 0.1);
+    color: rgb(150, 50, 50);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-right: 0.3rem;
+    margin-bottom: 0.3rem;
+    display: inline-block;
+}
+
+.formula {
+    font-family: 'Courier New', monospace;
+    background-color: #f5f5f5;
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+/* Выделение строки репетитора */
+#tutors-table-body tr.table-primary {
+    background-color: rgba(191, 65, 65, 0.1) !important;
+}
+
+#tutors-table-body tr.table-primary:hover {
+    background-color: rgba(191, 65, 65, 0.2) !important;
+}
+
+/* Блок выбранного курса */
+#selected-course-block {
+    border-left: 4px solid rgb(191, 65, 65);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Закрепленная полоса выбранного курса */
+#fixed-course-bar {
+    border-top: 3px solid rgb(191, 65, 65);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+/* Выделение строки репетитора */
+#tutors-table-body tr.table-primary {
+    background-color: rgba(191, 65, 65, 0.1) !important;
+}
+
+#tutors-table-body tr.table-primary:hover {
+    background-color: rgba(191, 65, 65, 0.2) !important;
+}
+
+/* Выделение карточки репетитора */
+.tutor-card.selected-tutor {
+    border: 2px solid rgb(191, 65, 65);
+    background-color: rgba(191, 65, 65, 0.05);
+}
+
+/* Стили для карточек репетиторов на мобильных */
+.tutor-card {
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.tutor-card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+/* Анимация для карточек курсов */
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Информация о расчете стоимости */
+#price-details p {
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+}
+
+#price-details strong {
+    color: rgb(191, 65, 65);
+}
+
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    
+    main.container {
+        padding: 1rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+
+    .display-5 {
+        font-size: 2rem;
+    }
+    
+    #notification-area {
+        top: 60px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+    
+    .table-responsive {
+        font-size: 0.9rem;
+    }
+    
+    .table th, .table td {
+        padding: 0.5rem;
+    }
+
+    #fixed-course-bar {
+        padding: 10px 0;
+    }
+    
+    #fixed-course-bar .container {
+        padding: 0 15px;
+    }
+    
+    #fixed-course-bar h5 {
+        font-size: 1rem;
+        margin-bottom: 2px;
+    }
+    
+    #fixed-course-bar small {
+        font-size: 0.8rem;
+    }
+    
+    #fixed-course-bar .btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+
+    /* Карточки репетиторов на мобильных */
+    #tutors-cards-container {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+    
+    #tutors-cards-container .col-12 {
+        flex: 0 0 auto;
+        width: 85%;
+        margin-right: 15px;
+    }
+    
+    #tutors-cards-container .col-12:last-child {
+        margin-right: 0;
+    }
+    
+    /* Скрываем полосу прокрутки на карточках */
+    #tutors-cards-container::-webkit-scrollbar {
+        height: 4px;
+    }
+    
+    #tutors-cards-container::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 2px;
+    }
+    
+    #tutors-cards-container::-webkit-scrollbar-thumb {
+        background: rgb(191, 65, 65, 0.5);
+        border-radius: 2px;
+    }
+    
+    #tutors-cards-container::-webkit-scrollbar-thumb:hover {
+        background: rgb(191, 65, 65);
+    }
+}
