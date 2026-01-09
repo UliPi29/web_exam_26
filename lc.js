@@ -9,6 +9,12 @@ let allTutors = [];
 let currentPage = 1;
 const ORDERS_PER_PAGE = 5;
 
+// Глобальные функции для вызова из HTML
+window.viewOrder = viewOrder;
+window.editOrder = editOrder;
+window.confirmDelete = confirmDelete;
+window.changeOrdersPage = changeOrdersPage;
+
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
     init();
@@ -16,11 +22,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function init() {
     try {
+        showNotification('Загрузка данных...', 'info');
+        
         await Promise.all([
             loadOrders(),
             loadCourses(),
             loadTutors()
         ]);
+        
         setupEventListeners();
     } catch (error) {
         showNotification('Ошибка при загрузке данных', 'danger');
@@ -36,12 +45,40 @@ async function loadOrders() {
         
         allOrders = await response.json();
         
+        // От ближайшей даты до дальнейшей
+        sortOrdersByDate();
+        
         displayOrders(currentPage);
     } catch (error) {
         console.error('Ошибка загрузки заявок:', error);
         throw error;
     }
 }
+
+// Сортировка заказов по дате
+function sortOrdersByDate() {
+    allOrders.sort((a, b) => {
+        // Создаем объекты Date для сравнения
+        const dateA = createDateForSorting(a.date_start, a.time_start);
+        const dateB = createDateForSorting(b.date_start, b.time_start);
+        
+        return dateA - dateB;
+    });
+}
+
+// Создание объекта Date для сортировки
+function createDateForSorting(dateString, timeString) {
+    try {
+        // Форматируем время
+        const formattedTime = formatTimeWithoutSeconds(timeString);
+        const dateTimeString = `${dateString}T${formattedTime}:00`;
+        return new Date(dateTimeString);
+    } catch (error) {
+        console.error('Ошибка создания даты для сортировки:', error);
+        return new Date('9999-12-31');
+    }
+}
+//
 
 // Загрузка курсов
 async function loadCourses() {
@@ -732,10 +769,29 @@ async function deleteOrder(orderId) {
             throw new Error(error.error || 'Ошибка удаления заявки');
         }
         
-        // Удаляем заявку из списка
-        allOrders = allOrders.filter(order => order.id !== orderId);
+        // Закрываем модальное окно подтверждения
+        const deleteModal = bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal'));
+        if (deleteModal) {
+            deleteModal.hide();
+        }
         
-        // Обновляем отображение
+        // Фильтруем массив, удаляя заявку с нужным id
+        allOrders = allOrders.filter(order => {
+            // Убедимся, что сравниваем числа с числами
+            return parseInt(order.id) !== parseInt(orderId);
+        });
+        
+        // Пересчитываем текущую страницу
+        const totalPages = Math.ceil(allOrders.length / ORDERS_PER_PAGE);
+        if (allOrders.length === 0) {
+            // Если заявок больше нет, возвращаемся на первую страницу
+            currentPage = 1;
+        } else if ((currentPage - 1) * ORDERS_PER_PAGE >= allOrders.length) {
+            // Если на текущей странице не осталось элементов, переходим на предыдущую
+            currentPage = Math.max(1, totalPages);
+        }
+        
+        // Перерисовываем таблицу
         displayOrders(currentPage);
         
         showNotification('Заявка успешно удалена', 'success');
@@ -912,9 +968,7 @@ function setupEventListeners() {
         confirmDeleteBtn.addEventListener('click', function() {
             const orderId = document.getElementById('delete-order-id').value;
             if (orderId) {
-                deleteOrder(orderId);
-                const modal = bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal'));
-                modal.hide();
+                deleteOrder(parseInt(orderId));
             }
         });
     }
